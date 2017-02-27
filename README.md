@@ -1,2 +1,2 @@
 # testrepo
-Test repository for experimentation
+Test repository for performance testing
