@@ -1,37 +1,50 @@
-## Welcome to GitHub Pages
+## Test repository for performance testing
 
-You can use the [editor on GitHub](https://github.com/GarbageBear/testrepo/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+### Outline
+Create a basic performance testing framework
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+#### Hardware
+- 4 5610s in development - same machines (replace with modern towers)
+- Then they sit in a server room - run windows server 2016 (docker)
 
-### Markdown
+#### Software
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+fme installation builds 
+- beta builds at least
+- rev builds if possible
 
-```markdown
-Syntax highlighted code block
+testsuite / master performance source data
+- accessible on a shared drive 
+- copied locally for performance
 
-# Header 1
-## Header 2
-### Header 3
+test harness 
+- YAML harness config for testsuite (replace) -> saved to drive -> python compare and analyze
+- YAML and new Python harness + FME command to dump stats / times -> JSON files save to shared drive
 
-- Bulleted
-- List
+shared log output location
+- drive/dropbox account
+- files for logstash
 
-1. Numbered
-2. List
+webhooks setup to notify on
+- first failure
+- test completion
+- test harness errors
 
-**Bold** and _Italic_ and `Code` text
+Docker to Github trigger URLs / token
+https://registry.hub.docker.com/u/garbagebear/testrepo/trigger/512bfda0-a5d7-4620-8cb7-ac07eebe71f9/
 
-[Link](url) and ![Image](src)
-```
+Docker Machine setup
+--------------------
+Docker Kitematic UI - get the ELK server and Python Windows server setup
+Docker Engine - to run this
+Docker Compose - YAML configuration - paths and config for data, tests, harness, servers
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+ELK Server
+----------
+ElasticSearch - store queryable result
+Logstash - capture docker input as JSON -> ElasticSearch
+Kibana - Dashboard / report on results
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/GarbageBear/testrepo/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Multiple Nodes
+--------------
+Docker Swarm - Distribition / orchestration of 4 machines
